@@ -90,8 +90,30 @@ function clearHover(tile) {
 function tileClicked(tile) {
     changeTile(tile, "click");
     let end = checkSolved();
+    
+    // if game has been solved
     if(end) {
-        gameEnd(true);
+
+        // disable clicking
+        for (let j = 0; j < allTiles.length; j++) {
+            const tile = allTiles[j];
+            tile.style.pointerEvents = "none";
+        }
+    
+        // disable submitting form submit/shuffle calls
+        for (let k = 0; k < document.getElementsByClassName("btn").length; k++) {
+            const button = document.getElementsByClassName("btn")[k];
+            button.style.pointerEvents = "none";
+        }
+
+        // disbale form
+        var inputs = document.getElementsByTagName("input"); 
+        for (var i = 0; i < inputs.length; i++) { 
+            inputs[i].disabled = true;
+        }
+
+        // show notification after 1 second
+        setTimeout(gameEnd, 1000);
     };
 }
 
@@ -151,35 +173,16 @@ function endTrophy() {
 }
 
 // extra feature: end-game notification
-function gameEnd(won) {
-    // show award/sorry msg if user won/lost
+function gameEnd() {
+    // show win msg
     endTrophy();
-    let playAgain = document.createElement("button");
-    playAgain.innerText = "Play Again"
-    playAgain.className = "btn";
 
-    if (won) {
-        trophy.innerHTML = "<h1>Congrats! You Won!</h1>";
-    }
-
-    var inputs = document.getElementsByTagName("input"); 
-    for (var i = 0; i < inputs.length; i++) { 
-        inputs[i].disabled = true;
-    }
-
-    // when play again is clicked, refresh page
-    playAgain.onclick = resetGame;
-    trophy.appendChild(playAgain);
-
+    trophy.innerHTML = "<h1>Congrats! You Won!</h1><h2>Please refresh the page to play again</h2>";
     trophy.id = "trophy";
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0;
     
     return false;
-}
-
-// extra feature: end-game notification
-// refresh page to reset game
-function resetGame() { 
-    location.reload();
 }
 
 // setup the board on page load

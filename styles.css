@@ -188,13 +188,14 @@ label img {
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    height: min-content;
-    /* position: absolute; */
-    top: 0%;
-    background-color: #1a2568db;
+    height: 50vh;
+    position: absolute;
+    top: 25%;
+    background-color: #3d54e1;
     z-index: 3;
     box-shadow: 0vw 0vw 2vw 1.5vw rgba(211, 211, 211, 0.783);
     color:white;
+    text-align: center;
 }
 
 .hide, #hide {
