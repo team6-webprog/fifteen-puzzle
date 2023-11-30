@@ -61,7 +61,6 @@ label img {
 	vertical-align: middle;
 	width: 96px;
     float: left;
-    background-image: url("background.jpg");
     z-index: 1;
 }
 

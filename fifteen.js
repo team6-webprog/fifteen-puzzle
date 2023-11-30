@@ -9,7 +9,7 @@ const mapStrNum = {"zero": 0, "one": 1, "two": 2, "three": 3};
 
 // extra feature: background selection
 let imgChoice = Math.floor(Math.random() * 3) + 1;
-const mapIndexImage = {1: 'background.jpg', 2: 'background2.jpg', 3: 'background3.jpg'};
+const mapIndexImage = {1: 'backgrounds/background.jpg', 2: 'backgrounds/background2.jpg', 3: 'backgrounds/background3.jpg'};
 
 // calculate position of given element
 function getPosition(element) {
