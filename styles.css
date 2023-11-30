@@ -22,12 +22,12 @@ h1{
 	padding: 0px;
 	position: relative;
 	width: 400px;
-    background: url("background.jpg") no-repeat;
     margin-left: auto;
     margin-right: auto;
 }
 
 .tile {
+    position: absolute;
     font-family: sans-serif;
     font-size: 32pt;
 	outline: 2px solid black;
@@ -37,6 +37,8 @@ h1{
 	vertical-align: middle;
 	width: 100px;
     float: left;
+    background-image: url("background.jpg");
+    z-index: 1;
 }
 
 #sixteen {
@@ -67,4 +69,72 @@ h1{
     display: flex;
     justify-content: right;
     margin-top:1em;
+}
+
+.zero_0 { 
+    top: 0px;
+    left: 0px;
+}
+.zero_1 {
+    top: 0px;
+    left: 100px;
+}
+.zero_2 {
+    top: 0px;
+    left: 200px;
+}
+.zero_3 {
+    top: 0px;
+    left: 300px;
+}
+
+.one_0 {
+    top: 100px;
+    left: 0px;
+}
+.one_1 {
+    top: 100px;
+    left: 100px;
+}
+.one_2 {
+    top: 100px;
+    left: 200px;
+}
+.one_3 {
+    top: 100px;
+    left: 300px;
+}
+
+.two_0 {
+    top: 200px;
+    left: 0px;
+}
+.two_1 {
+    top: 200px;
+    left: 100px;
+}
+.two_2 {
+    top: 200px;
+    left: 200px;
+}
+.two_3 {
+    top: 200px;
+    left: 300px;
+}
+
+.three_0 {
+    top: 300px;
+    left: 0px;
+}
+.three_1 {
+    top: 300px;
+    left: 100px;
+}
+.three_2 {
+    top: 300px;
+    left: 200px;
+}
+.three_3 {
+    top: 300px;
+    left: 300px;
 }
