@@ -38,9 +38,6 @@ function getRowCol(tile) {
 // find tiles that share a border with given tile
 function findNeighbors(tile) {
     const position = getPosition(tile);
-    // console.log("\n\nNeighbor Function:\n---")
-    // console.log("\nTile's Position: ");
-    // console.log("Left " + position.left + "; Top " + position.top + ";");
 
     // all the possible coordinates of neighbor tiles
     const coords = [[(puzzle_x + position.left - 100), (puzzle_y + position.top)],
@@ -48,24 +45,12 @@ function findNeighbors(tile) {
                     [(puzzle_x + position.left + 100), (puzzle_y + position.top)],
                     [(puzzle_x + position.left), (puzzle_y + position.top + 100)]];
 
-    // console.log("\nPossible Coordinates:");
-    // console.log("On Left: " + coords[0]);
-    // console.log("Above: " + coords[1]);
-    // console.log("On Right: " + coords[2]);
-    // console.log("Below: " + coords[3]);
-
     let neighbors = [];
-
-    // console.log("\nPuzzle X pos: " + puzzle_x + "; Puzzle Y pos: " + puzzle_y + ";")
     
     // populate neighbor array if the coordinates exist on the board
     // (tiles can only be in (0,0) and (400,400))
     for (let j = 0; j < coords.length; j++) {
         const xy = coords[j];
-
-        // console.log("\nCoordinate: " + xy);
-        // console.log("Less than X: " + (xy[0] < puzzle_x) + "; More than X+301: " + (xy[0] > puzzle_x + 301));
-        // console.log("Less than Y: " + (xy[1] < puzzle_y) + "; More than Y+301: " + (xy[1] > puzzle_y + 301))
 
         if (!(xy[0] < puzzle_x) && !(xy[0] > puzzle_x + 301) 
             && !(xy[1] < puzzle_y) && !(xy[1] > puzzle_y + 301)) {
@@ -82,10 +67,8 @@ function moveTile(tile, emptyTile) {
     const tileRC = getRowCol(tile);
     const emptyRC = getRowCol(emptyTile);
 
-    console.log("register move " + tile.classList + " " + emptyTile.classList);
     tile.classList.replace(tileRC.class, emptyRC.class);
     emptyTile.classList.replace(emptyRC.class, tileRC.class);
-    console.log(tile.classList + " " + emptyTile.classList);
 }
 
 // show hover effect when mouseover
