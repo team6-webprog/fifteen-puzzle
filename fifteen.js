@@ -132,7 +132,6 @@ function changeTile(tile, action) {
             }
             // if the action is click, move the tiles 
             else if (action == "click") {
-                console.log("register click")
                 var emptyTile = neighbors[k];
                 moveTile(tile, emptyTile);
                 break; 
@@ -185,6 +184,21 @@ function gameEnd() {
     return false;
 }
 
+// shuffle cards
+function shuffle() {
+    let emptyTile, neighbors, randInd;
+
+    for (let i = 0; i < 100; i++) {
+        emptyTile = document.getElementById("empty");
+
+        neighbors = findNeighbors(emptyTile);
+
+        randInd = Math.floor(Math.random() * neighbors.length);
+
+        moveTile(neighbors[randInd], emptyTile);
+    }
+}
+
 // setup the board on page load
 function setup() {
     // get location of puzzle on the screen
@@ -203,8 +217,8 @@ function setup() {
         const tile = allTiles[i];
         // determine it's position in relation to the puzzle container
         let pos = getPosition(tile);
-        // so long as it's not the last block that should be empty
-        if(!(pos.left >= 300 && pos.top >= 300)) {
+        // so long as it's not the tile that should be empty
+        if(tile.id != "empty") {
             // extra feature: background selection
             tile.style.backgroundImage = "url(" + mapIndexImage[imgChoice] + ")";
             // save part of the background to the tile 
@@ -216,6 +230,9 @@ function setup() {
             tile.addEventListener("mouseout", () => {clearHover(tile)});
         }
     }
+
+    // shuffle order of cards
+    shuffle();
 }
 
 // extra feature: background selection
