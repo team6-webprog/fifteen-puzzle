@@ -16,49 +16,62 @@
             <p>The goal of the fifteen puzzle is to un-jumble its fifteen square by repeatedly making move that slide
             squares into the empty space. How quickly can you solve it?</p>
 
-            <form action="#" name="chooseBackground" onsubmit="return processForm()" method="post">
-                Select a Background
+            <div class="gameContainer">
+                <form action="#" name="chooseBackground" onsubmit="return processForm()" method="post">
+                    Choose a Background
 
-                <div class="options">
-                    <div>
-                        <label><img src="backgrounds/background_1.jpg" alt="Mario"></label>
-                        <input type="radio" name="bg_img" value="1"> 
+                    <div class="options">
+                        <div>
+                            <label>
+                                <input type="radio" name="bg_img" value="1">
+                                <img src="backgrounds/background_1.jpg" alt="Mario">
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <label>
+                                <input type="radio" name="bg_img" value="2">
+                                <img src="backgrounds/background2.jpg" alt="Luigi">
+                            </label>
+                        </div>
+                        
+                        <div>
+                            <label>
+                                <input type="radio" name="bg_img" value="3">
+                                <img src="backgrounds/background_3.jpg" alt="Rubix Cube">
+                            </label>
+                        </div>
                     </div>
-                    
-                    <div>
-                        <label><img src="backgrounds/background2.jpg" alt="Luigi"></label>
-                        <input type="radio" name="bg_img" value="2">
+            
+                    <input type="submit" value="Play" class="btn">        
+                </form>
+
+                <div>
+                    <div class="puzzle" id="puzzle">
+                        <div class="one tile zero_0" id="one">1</div>
+                        <div class="two tile zero_1" id="two">2</div>
+                        <div class="three tile zero_2" id="three">3</div>
+                        <div class="four tile zero_3" id="four">4</div>
+                        <div class="five tile one_0" id="five">5</div>
+                        <div class="six tile one_1" id="six">6</div>
+                        <div class="seven tile one_2" id="seven">7</div>
+                        <div class="eight tile one_3" id="eight">8</div>
+                        <div class="nine tile two_0" id="nine">9</div>
+                        <div class="ten tile two_1" id="ten">10</div>
+                        <div class="eleven tile two_2" id="eleven">11</div>
+                        <div class="twelve tile two_3" id="twelve">12</div>
+                        <div class="thirteen tile three_0" id="thirteen">13</div>
+                        <div class="fourteen tile three_1" id="fourteen">14</div>
+                        <div class="fifteen tile three_2" id="fifteen">15</div>
+                        <div class="empty tile three_3" id="empty"></div>
                     </div>
-                    
-                    <div>
-                        <label><img src="backgrounds/background_3.jpg" alt="Rubix Cube"></label>
-                        <input type="radio" name="bg_img" value="3">
-                    </div>
+
+                    <button class="btn">Shuffle</button>
                 </div>
-        
-                <input type="submit" value="Change Background">        
-            </form>
 
-            <div class="puzzle" id="puzzle">
-                <div class="one tile zero_0" id="one">1</div>
-                <div class="two tile zero_1" id="two">2</div>
-                <div class="three tile zero_2" id="three">3</div>
-                <div class="four tile zero_3" id="four">4</div>
-                <div class="five tile one_0" id="five">5</div>
-                <div class="six tile one_1" id="six">6</div>
-                <div class="seven tile one_2" id="seven">7</div>
-                <div class="eight tile one_3" id="eight">8</div>
-                <div class="nine tile two_0" id="nine">9</div>
-                <div class="ten tile two_1" id="ten">10</div>
-                <div class="eleven tile two_2" id="eleven">11</div>
-                <div class="twelve tile two_3" id="twelve">12</div>
-                <div class="thirteen tile three_0" id="thirteen">13</div>
-                <div class="fourteen tile three_1" id="fourteen">14</div>
-                <div class="fifteen tile three_2" id="fifteen">15</div>
-                <div class="empty tile three_3" id="empty"></div>
+                
             </div>
-
-            <button class="btn">Shuffle</button>
+            
 
             <p>American puzzle author and mathematician Sam Loys is often falsely credited with creating the puzzle; indeed,
                 Loyd claimed from 1891 until his death in 1911 that he invented it. The puzzle was actually craeted around

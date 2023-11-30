@@ -2,9 +2,11 @@
 window.addEventListener("load", setup);
 
 // global variables initialized during setup
+let puzzle_size;
 let puzzle_x = '';
 let puzzle_y = '';
 let allTiles = '';
+let trophy;
 const mapStrNum = {"zero": 0, "one": 1, "two": 2, "three": 3};
 
 // extra feature: background selection
@@ -36,18 +38,35 @@ function getRowCol(tile) {
 // find tiles that share a border with given tile
 function findNeighbors(tile) {
     const position = getPosition(tile);
+    // console.log("\n\nNeighbor Function:\n---")
+    // console.log("\nTile's Position: ");
+    // console.log("Left " + position.left + "; Top " + position.top + ";");
 
     // all the possible coordinates of neighbor tiles
     const coords = [[(puzzle_x + position.left - 100), (puzzle_y + position.top)],
                     [(puzzle_x + position.left), (puzzle_y + position.top - 100)],
                     [(puzzle_x + position.left + 100), (puzzle_y + position.top)],
                     [(puzzle_x + position.left), (puzzle_y + position.top + 100)]];
+
+    // console.log("\nPossible Coordinates:");
+    // console.log("On Left: " + coords[0]);
+    // console.log("Above: " + coords[1]);
+    // console.log("On Right: " + coords[2]);
+    // console.log("Below: " + coords[3]);
+
     let neighbors = [];
+
+    // console.log("\nPuzzle X pos: " + puzzle_x + "; Puzzle Y pos: " + puzzle_y + ";")
     
     // populate neighbor array if the coordinates exist on the board
     // (tiles can only be in (0,0) and (400,400))
     for (let j = 0; j < coords.length; j++) {
         const xy = coords[j];
+
+        // console.log("\nCoordinate: " + xy);
+        // console.log("Less than X: " + (xy[0] < puzzle_x) + "; More than X+301: " + (xy[0] > puzzle_x + 301));
+        // console.log("Less than Y: " + (xy[1] < puzzle_y) + "; More than Y+301: " + (xy[1] > puzzle_y + 301))
+
         if (!(xy[0] < puzzle_x) && !(xy[0] > puzzle_x + 301) 
             && !(xy[1] < puzzle_y) && !(xy[1] > puzzle_y + 301)) {
             neighbors.push(document.elementFromPoint(xy[0], xy[1]));
@@ -63,8 +82,10 @@ function moveTile(tile, emptyTile) {
     const tileRC = getRowCol(tile);
     const emptyRC = getRowCol(emptyTile);
 
+    console.log("register move " + tile.classList + " " + emptyTile.classList);
     tile.classList.replace(tileRC.class, emptyRC.class);
     emptyTile.classList.replace(emptyRC.class, tileRC.class);
+    console.log(tile.classList + " " + emptyTile.classList);
 }
 
 // show hover effect when mouseover
@@ -82,6 +103,15 @@ function clearHover(tile) {
     tile.style.zIndex = "1";
 }
 
+// when tile is clicked
+function tileClicked(tile) {
+    changeTile(tile, "click");
+    let end = checkSolved();
+    if(end) {
+        gameEnd(true);
+    };
+}
+
 // perform action on given tile
 function changeTile(tile, action) {
     // find neighboring tiles
@@ -97,6 +127,7 @@ function changeTile(tile, action) {
             }
             // if the action is click, move the tiles 
             else if (action == "click") {
+                console.log("register click")
                 var emptyTile = neighbors[k];
                 moveTile(tile, emptyTile);
                 break; 
@@ -105,9 +136,73 @@ function changeTile(tile, action) {
     }
 }
 
+// check to see if puzzle is solved
+function checkSolved() {
+    const currentTileOrder = document.getElementsByClassName("tile");
+    let ind = 0;
+
+    for (let m = 0; m < puzzle_size; m++) {
+        for(let n = 0; n < puzzle_size; n++) {
+            let rowCol = getRowCol(currentTileOrder[ind]);
+            
+            // if the tiles are in order, then the row and column class
+            // should correspond to a nested for loop traversal
+            // if not, end check due to it still being unsolved
+            if(!(m == rowCol.row && n == rowCol.col)) {
+                return false;
+            }
+            ind += 1;
+        } 
+    }
+    return true;
+}
+
+// extra feature: end-game notification
+function endTrophy() {
+    trophy = document.createElement("div");
+    trophy.id = "hide";
+    trophy.innerHTML = ""
+
+    document.body.insertBefore(trophy, document.body.childNodes[0]);
+    return false;
+}
+
+// extra feature: end-game notification
+function gameEnd(won) {
+    // show award/sorry msg if user won/lost
+    endTrophy();
+    let playAgain = document.createElement("button");
+    playAgain.innerText = "Play Again"
+    playAgain.className = "btn";
+
+    if (won) {
+        trophy.innerHTML = "<h1>Congrats! You Won!</h1>";
+    }
+
+    var inputs = document.getElementsByTagName("input"); 
+    for (var i = 0; i < inputs.length; i++) { 
+        inputs[i].disabled = true;
+    }
+
+    // when play again is clicked, refresh page
+    playAgain.onclick = resetGame;
+    trophy.appendChild(playAgain);
+
+    trophy.id = "trophy";
+    
+    return false;
+}
+
+// extra feature: end-game notification
+// refresh page to reset game
+function resetGame() { 
+    location.reload();
+}
+
 // setup the board on page load
 function setup() {
     // get location of puzzle on the screen
+    puzzle_size = 4;
     puzzle_x = document.getElementById("puzzle").getBoundingClientRect().x;
     puzzle_y = document.getElementById("puzzle").getBoundingClientRect().y;
 
@@ -130,7 +225,7 @@ function setup() {
             tile.style.backgroundPosition = "" + (400 - pos.left) + "px " + (400 - pos.top) + "px";
 
             // add event listeners to handle clicks and hovering
-            tile.addEventListener("click", () => {changeTile(tile, "click")});
+            tile.addEventListener("click", () => {tileClicked(tile)});
             tile.addEventListener("mouseover", () => {changeTile(tile, "hover")});
             tile.addEventListener("mouseout", () => {clearHover(tile)});
         }
