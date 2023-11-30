@@ -14,7 +14,30 @@
         <div class="container">
             <h1>Project 3 - Fifteen Puzzle</h1>
             <p>The goal of the fifteen puzzle is to un-jumble its fifteen square by repeatedly making move that slide
-                squares into the empty space. How quickly can you solve it?</p>
+            squares into the empty space. How quickly can you solve it?</p>
+
+            <form action="#" name="chooseBackground" onsubmit="return processForm()" method="post">
+                Select a Background
+
+                <div class="options">
+                    <div>
+                        <label><img src="background_1.jpg" alt="Mario"></label>
+                        <input type="radio" name="bg_img" value="1"> 
+                    </div>
+                    
+                    <div>
+                        <label><img src="background2.jpg" alt="Luigi"></label>
+                        <input type="radio" name="bg_img" value="2">
+                    </div>
+                    
+                    <div>
+                        <label><img src="background_3.jpg" alt="Rubix Cube"></label>
+                        <input type="radio" name="bg_img" value="3">
+                    </div>
+                </div>
+        
+                <input type="submit" value="Change Background">        
+            </form>
 
             <div class="puzzle" id="puzzle">
                 <div class="one tile zero_0" id="one">1</div>

@@ -17,6 +17,30 @@ h1{
     text-align: center;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0vw;
+}
+
+form .options {
+    display: flex;
+    flex-direction: row;
+}
+
+form .options div {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+label img {
+    width: 100px;
+    height: 100px;
+}
+
+
 .puzzle {
     height: 400px;
 	padding: 0px;
@@ -30,12 +54,12 @@ h1{
     position: absolute;
     font-family: sans-serif;
     font-size: 32pt;
-	outline: 2px solid black;
-	height: 100px;
+	border: 2px solid black;
+	height: 96px;
 	line-height: 100px;
 	text-align: center;
 	vertical-align: middle;
-	width: 100px;
+	width: 96px;
     float: left;
     background-image: url("background.jpg");
     z-index: 1;

@@ -7,6 +7,10 @@ let puzzle_y = '';
 let allTiles = '';
 const mapStrNum = {"zero": 0, "one": 1, "two": 2, "three": 3};
 
+// extra feature: background selection
+let imgChoice = Math.floor(Math.random() * 3) + 1;
+const mapIndexImage = {1: 'background.jpg', 2: 'background2.jpg', 3: 'background3.jpg'};
+
 // calculate position of given element
 function getPosition(element) {
     const tile = element.getBoundingClientRect();
@@ -34,18 +38,18 @@ function findNeighbors(tile) {
     const position = getPosition(tile);
 
     // all the possible coordinates of neighbor tiles
-    const coords = [[puzzle_x + position.left - 100, puzzle_y + position.top],
-                    [puzzle_x + position.left, puzzle_y + position.top - 100],
-                    [puzzle_x + position.left + 100, puzzle_y + position.top],
-                    [puzzle_x + position.left, puzzle_y + position.top + 100]];
+    const coords = [[(puzzle_x + position.left - 100), (puzzle_y + position.top)],
+                    [(puzzle_x + position.left), (puzzle_y + position.top - 100)],
+                    [(puzzle_x + position.left + 100), (puzzle_y + position.top)],
+                    [(puzzle_x + position.left), (puzzle_y + position.top + 100)]];
     let neighbors = [];
     
     // populate neighbor array if the coordinates exist on the board
     // (tiles can only be in (0,0) and (400,400))
     for (let j = 0; j < coords.length; j++) {
         const xy = coords[j];
-        if (!(xy[0] < puzzle_x) && !(xy[0] > puzzle_x + 300) 
-            && !(xy[1] < puzzle_y) && !(xy[1] > puzzle_y + 300)) {
+        if (!(xy[0] < puzzle_x) && !(xy[0] > puzzle_x + 301) 
+            && !(xy[1] < puzzle_y) && !(xy[1] > puzzle_y + 301)) {
             neighbors.push(document.elementFromPoint(xy[0], xy[1]));
         }
     }
@@ -107,6 +111,9 @@ function setup() {
     puzzle_x = document.getElementById("puzzle").getBoundingClientRect().x;
     puzzle_y = document.getElementById("puzzle").getBoundingClientRect().y;
 
+    // extra feature: background selection
+    document.querySelectorAll("input[value='" + imgChoice.toString() + "']")[0].checked = true;
+
     // get all the tiles
     allTiles = document.getElementsByClassName("tile");
 
@@ -116,8 +123,10 @@ function setup() {
         // determine it's position in relation to the puzzle container
         let pos = getPosition(tile);
         // so long as it's not the last block that should be empty
-        if(!(pos.left == 300 && pos.top == 300)) {
-            // save part of the background to the tile
+        if(!(pos.left >= 300 && pos.top >= 300)) {
+            // extra feature: background selection
+            tile.style.backgroundImage = "url(" + mapIndexImage[imgChoice] + ")";
+            // save part of the background to the tile 
             tile.style.backgroundPosition = "" + (400 - pos.left) + "px " + (400 - pos.top) + "px";
 
             // add event listeners to handle clicks and hovering
@@ -126,4 +135,11 @@ function setup() {
             tile.addEventListener("mouseout", () => {clearHover(tile)});
         }
     }
+}
+
+// extra feature: background selection
+function processForm() {
+    imgChoice = parseInt(document.forms["chooseBackground"]["bg_img"].value);
+    setup();
+    return false;
 }
