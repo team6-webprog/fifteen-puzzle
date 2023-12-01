@@ -93,7 +93,6 @@ function tileClicked(tile) {
     
     // if game has been solved
     if(end) {
-
         // disable clicking
         for (let j = 0; j < allTiles.length; j++) {
             const tile = allTiles[j];
@@ -187,10 +186,8 @@ function gameEnd() {
 // shuffle cards
 function shuffle() {
     let emptyTile, neighbors, randInd;
-
     for (let i = 0; i < 100; i++) {
         emptyTile = document.getElementById("empty");
-
         neighbors = findNeighbors(emptyTile);
 
         randInd = Math.floor(Math.random() * neighbors.length);
@@ -212,22 +209,41 @@ function setup() {
     // get all the tiles
     allTiles = document.getElementsByClassName("tile");
 
+    // in order to assign the right part of the picture to each number
+    // create an incrementing row and col counter
+    let r = 0;
+    let c = 0;
+
     // for each tile
     for (let i = 0; i < allTiles.length; i++) {
         const tile = allTiles[i];
         // determine it's position in relation to the puzzle container
         let pos = getPosition(tile);
+
         // so long as it's not the tile that should be empty
         if(tile.id != "empty") {
+            if (c == 4) {
+                r += 1; // move to next row
+                c = 0; // reset column
+            }
+            
             // extra feature: background selection
             tile.style.backgroundImage = "url(" + mapIndexImage[imgChoice] + ")";
             // save part of the background to the tile 
-            tile.style.backgroundPosition = "" + (400 - pos.left) + "px " + (400 - pos.top) + "px";
+            tile.style.backgroundPosition = "" + (400 - c*100) + "px " + (400 - r*100) + "px";
 
             // add event listeners to handle clicks and hovering
-            tile.addEventListener("click", () => {tileClicked(tile)});
-            tile.addEventListener("mouseover", () => {changeTile(tile, "hover")});
-            tile.addEventListener("mouseout", () => {clearHover(tile)});
+            if(!(tile.hasAttribute("clickListener"))) {
+                tile.addEventListener("click", () => {tileClicked(tile);});
+                tile.setAttribute("clickListener", true);
+            }
+
+            if (!(tile.hasAttribute("hoverListener"))) {
+                tile.addEventListener("mouseover", () => {changeTile(tile, "hover")});
+                tile.addEventListener("mouseout", () => {clearHover(tile)});
+                tile.setAttribute("hoverListener", true);
+            }
+            c+=1; // update column
         }
     }
 
