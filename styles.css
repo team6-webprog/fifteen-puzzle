@@ -7,6 +7,11 @@ body {
     font-family: 'Open Sans';
 }
 
+/* extra feature: music */
+#bgMusic {
+    display: none; /* Hide the audio player */
+}
+
 .container {
     width: 65%;
     margin: 0 auto;
@@ -175,14 +180,6 @@ label img {
     left: 300px;
 }
 
-.winText {
-	color: red;
-	font-size: 50px;
-	position: relative;
-	width: 50%;
-	text-align: right;
-}
-
 #trophy {
     display: flex;
     flex-direction: column;
@@ -200,4 +197,9 @@ label img {
 
 .hide, #hide {
     display: none;
+}
+
+#timer {
+    text-align: center;
+    margin-bottom: 10px;
 }

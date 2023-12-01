@@ -7,6 +7,8 @@ let puzzle_x = '';
 let puzzle_y = '';
 let allTiles = '';
 let trophy;
+let timer;
+let seconds = 0;
 const mapStrNum = {"zero": 0, "one": 1, "two": 2, "three": 3};
 
 // extra feature: background selection
@@ -249,6 +251,24 @@ function setup() {
 
     // shuffle order of cards
     shuffle();
+    startTimer();
+}
+
+// extra feature: game timer
+function startTimer() {
+    // Clear any existing timer
+    clearInterval(timer);
+
+    // Reset seconds
+    seconds = 0;
+
+    // Update the timer every second
+    timer = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    seconds++;
+    document.getElementById("timer").innerText = `${seconds} seconds`;
 }
 
 // extra feature: background selection

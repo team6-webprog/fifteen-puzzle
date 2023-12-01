@@ -9,8 +9,10 @@
     </head>
 
     <body>
-
-        <div class="container">
+        <audio id="bgMusic" autoplay loop>
+            <source src="Epic_Build_Up_Music_-_The_Storm.mp3" type="audio/mp3">
+        </audio>
+            <div class="container">
             <h1>Project 3 - Fifteen Puzzle</h1>
             <p>The goal of the fifteen puzzle is to un-jumble its fifteen square by repeatedly 
                 making move that slide squares into the empty space. How quickly can you solve it?</p>
@@ -46,6 +48,7 @@
                 </form>
 
                 <div>
+                    <p id="timer">0 seconds</p>  
                     <div class="puzzle" id="puzzle">
                         <div class="one tile zero_0" id="one">1</div>
                         <div class="two tile zero_1" id="two">2</div>
@@ -82,5 +85,4 @@
 
         </div>
     </body>
-
 </html>
