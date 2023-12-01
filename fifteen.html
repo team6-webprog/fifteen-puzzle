@@ -46,9 +46,10 @@
             
                     <div class="select">
                         <label for="puzzle_size">Puzzle Size:</label>
-                        <select id="puzzle_size" name="puzzle_size" required>
+                        <select id="puzzle_size" name="puzzle_size" size="1" required>
+                            <option value="">_</option>
                             <option value="3">3x3</option>
-                            <option value="4">4x4</option>
+                            <option value="4" selected>4x4</option>
                         </select>
                     </div>
 
@@ -58,22 +59,6 @@
                 <div>
                     <p id="timer">0 seconds</p>  
                     <div class="puzzle" id="puzzle">
-                        <!-- <div class="one tile zero_0 hide" id="one">1</div>
-                        <div class="two tile zero_1 hide" id="two">2</div>
-                        <div class="three tile zero_2 hide" id="three">3</div>
-                        <div class="four tile zero_3 hide" id="four">4</div>
-                        <div class="five tile one_0 hide" id="five">5</div>
-                        <div class="six tile one_1 hide" id="six">6</div>
-                        <div class="seven tile one_2 hide" id="seven">7</div>
-                        <div class="eight tile one_3 hide" id="eight">8</div>
-                        <div class="nine tile two_0 hide" id="nine">9</div>
-                        <div class="ten tile two_1 hide" id="ten">10</div>
-                        <div class="eleven tile two_2 hide" id="eleven">11</div>
-                        <div class="twelve tile two_3 hide" id="twelve">12</div>
-                        <div class="thirteen tile three_0 hide" id="thirteen">13</div>
-                        <div class="fourteen tile three_1 hide" id="fourteen">14</div>
-                        <div class="fifteen tile three_2 hide" id="fifteen">15</div>
-                        <div class="empty tile three_3" id="empty"></div> -->
                     </div>
 
                     <button class="btn" onclick="shuffle()">Shuffle</button>
@@ -86,9 +71,9 @@
                 1874 by Noyes Palmer Chapman, a postmaster in Canastota, New York.</p>
 
             <div id="validator">
-                <a href="https://validator.w3.org/"><img src="images/w3c-xhtml.png" alt="Valid XHTML 1.1" /></a>
-                <a href="https://jigsaw.w3.org/css-validator/"><img src="images/w3c-css.png" alt="Valid CSS" /></a>
-                <a href="https://www.jslint.com/"><img src="images/jslint.png" alt="JavaScript Lint" /></a>
+                <a href="https://validator.w3.org/"><img src="images/w3c-xhtml.png" alt="Valid XHTML 1.1"></a>
+                <a href="https://jigsaw.w3.org/css-validator/"><img src="images/w3c-css.png" alt="Valid CSS"></a>
+                <a href="https://www.jslint.com/"><img src="images/jslint.png" alt="JavaScript Lint"></a>
             </div>
 
         </div>

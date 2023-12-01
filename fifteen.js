@@ -1,5 +1,4 @@
 // global variables initialized during setup
-let puzzle;
 let puzzle_x = '';
 let puzzle_y = '';
 let allTiles = '';
@@ -15,7 +14,7 @@ const mapIndexImage = {1: 'backgrounds/background.jpg', 2: 'backgrounds/backgrou
 const map300Image = {1: 'backgrounds/background_300.jpg', 2: 'backgrounds/background2_300.jpg', 3: 'backgrounds/background3_300.jpg'};;
 
 // extra feature: puzzle size
-let puzzle_size = 3;
+let puzzle_size = 4;
 
 // calculate position of given element
 function getPosition(element) {
@@ -208,7 +207,7 @@ function shuffle() {
 // create puzzle
 function initializePuzzle() {
     // determine size
-    puzzle = document.getElementById("puzzle");
+    let puzzle = document.getElementById("puzzle");
     puzzle.style.width = (puzzle_size * 100) + "px";
     puzzle.style.height = (puzzle_size * 100) + "px";
     puzzle.textContent = '';
